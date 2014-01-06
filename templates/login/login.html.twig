@@ -1,0 +1,43 @@
+{% extends "generic/layout.html.twig" %}
+
+{% block title %} Piray Login {% endblock %}
+
+{% block main %}
+<form class="form-horizontal" action="login" method="post">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Login</legend>
+
+<!-- Text input-->
+<div class="form-group">
+    <label class="col-md-4 control-label" for="textinput">User Name</label>  
+    <div class="col-md-4">
+        <input id="username" name="username" type="text" placeholder="your name" class="form-control input-md">
+    </div>
+</div>
+
+<!-- Password input-->
+<div class="form-group">
+    <label class="col-md-4 control-label" for="password">Password</label>
+    <div class="col-md-4">
+        <input id="password" name="password" type="password" placeholder="your password" class="form-control input-md">
+    </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+    <label class="col-md-4 control-label" for="submit"></label>
+    <div class="col-md-4">
+        <button id="submit" name="submit" class="btn btn-primary">Sign In</button>
+    </div>
+</div>
+
+</fieldset>
+</form>
+<div class="row clearfix">
+    <div class="col-md-12 column">
+        {{ login_msg }}
+    </div>
+</div>
+{% endblock %}
