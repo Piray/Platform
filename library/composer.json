@@ -1,0 +1,17 @@
+{
+    "require": {
+        "twig/twig": "1.15.*",
+        "j4mie/idiorm": "1.4.*",
+        "slim/slim": "2.4.*",
+        "phpmailer/phpmailer": "5.2.*",
+        "twitter/bootstrap": "3.0.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "": [
+                "../",
+                "../modules/"
+            ]
+        }
+    }
+}
