@@ -3,7 +3,9 @@
 {% block title %} Service Piray {% endblock %}
 
 {% block main %}
-{% for component in service_component %}
-    <p><a href="{{ component.action }}">{{ component.name }}</a></p>
-{% endfor %}
+<div class="row">
+    {% for component in service_component %}
+        <div class='col-md-3'><a href="{{ component.action }}">{{ component.name }}</a></div>
+    {% endfor %}
+</div>
 {% endblock %}
