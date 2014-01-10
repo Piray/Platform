@@ -4,7 +4,7 @@ namespace routes;
 
 class Platform
 {
-    private $_systemMenu = array();
+    private $_platformModule = array();
     private $_userApi = null;
     private $_mailApi = null;
     private $_login = null;
@@ -39,13 +39,13 @@ class Platform
     {
         echo $this->ui->render('index/index.html.twig');
     }
-    public function registPirayMenu($menuName, $linkAction)
+    public function registPlatformModule($menuName, $linkAction)
     {
-        $this->_systemMenu[] = array(
+        $this->_platformModule[] = array(
             'name' => $menuName,
             'action' => $linkAction
         );
-        $this->ui->addGlobal('service_menu', $this->_systemMenu);
+        $this->ui->addGlobal('service_component', $this->_platformModule);
     }
     public function authenticate() // middleware to lock need to authenticate private page
     {
