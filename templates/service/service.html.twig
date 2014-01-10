@@ -1,0 +1,9 @@
+{% extends "generic/layout.html.twig" %}
+
+{% block title %} Service Piray {% endblock %}
+
+{% block main %}
+{% for component in service_component %}
+    <p><a href="{{ component.action }}">{{ component.name }}</a></p>
+{% endfor %}
+{% endblock %}
