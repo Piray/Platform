@@ -26,6 +26,11 @@ class Platform
         $this->app->get('/', array($this, 'getIndex'))->name('index');
         $this->app->get('/about', array($this, 'getAbout'));
         $this->app->get('/contact', array($this, 'getContact'));
+        $this->app->get('/service', array($this, 'authenticate'), array($this, 'getService'));
+    }
+    public function getService()
+    {
+        echo $this->ui->render('service/service.html.twig');
     }
     public function getContact()
     {
