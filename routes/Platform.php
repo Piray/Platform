@@ -24,7 +24,6 @@ class Platform
 
         // platform routing
         $this->app->get('/', array($this, 'getIndex'))->name('index');
-        $this->app->get('/about', array($this, 'getAbout'));
         $this->app->get('/contact', array($this, 'getContact'));
         $this->app->get('/service', array($this, 'authenticate'), array($this, 'getService'));
     }
@@ -35,10 +34,6 @@ class Platform
     public function getContact()
     {
         echo $this->ui->render('contact/contact.html.twig');
-    }
-    public function getAbout()
-    {
-        echo $this->ui->render('about/about.html.twig');
     }
     public function getIndex()
     {
