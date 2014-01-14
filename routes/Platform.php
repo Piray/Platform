@@ -39,13 +39,15 @@ class Platform
     {
         echo $this->ui->render('index/index.html.twig');
     }
-    public function registPlatformModule($menuName, $linkAction)
+    public function registPlatformModule($moduleName, $moduleLink, $moduleTitle, $moduleImage = null)
     {
         $this->_platformModule[] = array(
-            'name' => $menuName,
-            'action' => $linkAction
+            'name' => $moduleName,
+            'link' => $moduleLink,
+            'title' => $moduleTitle,
+            'image' => $moduleImage
         );
-        $this->ui->addGlobal('service_component', $this->_platformModule);
+        $this->ui->addGlobal('modules', $this->_platformModule);
     }
     public function authenticate() // middleware to lock need to authenticate private page
     {
