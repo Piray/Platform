@@ -25,11 +25,11 @@ class Platform
         // platform routing
         $this->app->get('/', array($this, 'getIndex'))->name('index');
         $this->app->get('/contact', array($this, 'getContact'));
-        $this->app->get('/service', array($this, 'authenticate'), array($this, 'getService'));
+        $this->app->get('/apps', array($this, 'getApps'));
     }
-    public function getService()
+    public function getApps()
     {
-        echo $this->ui->render('service/service.html.twig');
+        echo $this->ui->render('apps/apps.html.twig');
     }
     public function getContact()
     {
