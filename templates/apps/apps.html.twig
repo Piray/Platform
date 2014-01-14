@@ -1,0 +1,21 @@
+{% extends "generic/layout.html.twig" %}
+
+{% block title %} Service Piray {% endblock %}
+{% block main %}
+<div class="page-header">
+    <h2>Piray Apps <small>make you easy to use</small></h2>
+</div>
+<div class="row">
+    {% for module in modules %}
+    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6">
+        <a href="{{ module.link }}" class="thumbnail">
+        {% if module.image is empty %}
+            <img src="http://placehold.it/300x300&text={{ module.name }}" title="{{ module.title }}" />
+        {% else %}
+            <img src="{{ module.image }}" title="{{ module.title }}" />
+        {% endif %}
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
