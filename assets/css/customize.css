@@ -1,0 +1,14 @@
+/*!
+ *
+ * Piray Platform customize css for all platform apps
+ *
+ */
+
+.platform-customize-breadcrumb {
+    background: none;
+}
+
+.intro {
+    font-size: 18px;
+    line-height: 1.8;
+}
