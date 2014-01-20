@@ -18,7 +18,10 @@ class Login extends \library\Module
     {
         $loginMsg = $this->session->getVariable('login_msg');
         $this->session->unsetVariable('login_msg');
-        echo $this->ui->render('login/login.html.twig', array('login_msg' => $loginMsg));
+        echo $this->ui->render('login/login.html.twig', array(
+            'page_header' => array('title' => 'Login', 'subtitle' => 'security session'),
+            'login_msg' => $loginMsg
+        ));
     }
     public function postLogin()
     {
@@ -29,7 +32,7 @@ class Login extends \library\Module
             if ($this->userValid($username, $password)) {
                 $this->session->unsetVariable('login_msg');
                 $this->setLogin($username);
-                $requestUri = $this->session->getVariable('request_uri');
+                $requestUri = $this->session->getVariable('request_url');
                 if (null !== $requestUri) {
                     $this->app->redirect($requestUri);
                 } 
@@ -86,7 +89,7 @@ class Login extends \library\Module
             // check already login and pass
         } else {
             // query to login
-            $this->session->setVariable('request_uri', $request->getRootUri() . $request->getResourceUri());
+            $this->session->setVariable('request_url', $request->getRootUri() . $request->getResourceUri());
             $this->app->redirect($this->app->urlFor('login'));
         }
     }
