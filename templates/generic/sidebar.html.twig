@@ -1,0 +1,12 @@
+{% if sidebar_list %}
+    <ul class="nav nav-pills nav-stacked">
+    <li><h2>{{ sidebar_title }}</h2></li>
+    {% for item in sidebar_list %}
+        {% if item.link == resource_url %}
+        <li class="active"><a href="{{ base_url }}{{ item.link }}"><span class="glyphicon glyphicon-chevron-right"></span> {{ item.title }}</a></li>
+        {% else %}
+        <li><a href="{{ base_url }}{{ item.link }}"><span class="glyphicon glyphicon-chevron-right"></span> {{ item.title }}</a></li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+{% endif %}
