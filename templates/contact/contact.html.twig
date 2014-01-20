@@ -1,10 +1,58 @@
 {% extends "generic/layout.html.twig" %}
 
-{% block title %} Contact Piray {% endblock %}
+{% block title %} {{ page_header.title }} {% endblock %}
 
 {% block main %}
-<div class="page-header">
-    <h2>Contact Piray <small>any problem we will solve it</small></h2>
+{% include 'generic/page_header.html.twig' %}
+<div class="row">
+    <div class="col-lg-8 col-md-7 col-sm-7">
+            <img src="http://t1.ftcdn.net/jpg/00/36/70/68/400_F_36706865_nr03IQvO3EDn95ST0aPS7WlNUCZXohBR.jpg" class="img-responsive center-block">
+            <div class="text-center">
+                <h1>服務, 價值</h1>
+                <p class="intro">我們專精系統與設備建置，將現今科技技術應用於各領域<br>
+                    您的問題我們將為您解決，歡迎洽詢</p>
+            </div>
+    </div>
+    <div class="col-lg-4 col-md-5 col-sm-5">
+        <form>
+            <div class="form-group">
+                <label for="contact_name">姓名 Name *</label>
+                <input id="contact_name" type="text" name="name" class="form-control">
+            </div>
+            <div class="form-group">
+                <label class="radio-inline">
+                    <input type="radio" name="sex" value="male" checked> 先生
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="sex" value="female"> 女士
+                </label>
+            </div>
+            <div class="form-group">
+                <label for="contact_email">電子郵件 Email Address *</label>
+                <input id="contact_email" type="email" name="email" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="contact_phone">電話 Phone</label>
+                <input id="contact_phone" type="text" name="phone" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="contact_subject">主旨 Subject *</label>
+                <input id="contact_subject" type="text" name="subject" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="contact_question">問題 Question *</label>
+                <select id="contact_question" name="question" class="form-control">
+                    <option>功能建議</option>
+                    <option>系統操作問題</option>
+                    <option>其它</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="contact_message">留言 Message *</label>
+                <textarea id="contact_message" class="form-control" rows="8"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">傳送 Submit</button>
+        </form>
+    </div>
 </div>
-If you have any problem, please contact us.
 {% endblock %}
