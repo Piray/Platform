@@ -41,5 +41,34 @@ class Helper
         curl_close($curl);
         return json_decode($result, true);
     }
+    public function genBreadcrumbs($routeNameMap = array())
+    {
+        $breadcrumbs = array();
+        $request = $this->app->request();
+        $routes = explode('/', $request->getResourceUri());
+
+        $link = array();
+        foreach ($routes as $route) {
+            if (empty($route)) {
+                continue;
+            }
+
+            // replace by routeNameMap if it's defined.
+            $title = $route;
+            if (isset($routeNameMap[$route])) {
+                $title = $routeNameMap[$route];
+            }
+
+            // re-organize link for every crumb
+            $link[] = $route;
+
+            // append every crumb to crumbs
+            $breadcrumbs[] = array(
+                'link' => '/' . implode('/', $link),
+                'title' => $title
+            );
+        }
+        return $breadcrumbs;
+    }
 }
 
