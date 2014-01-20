@@ -16,6 +16,7 @@ $app = new Slim\Slim($platformConfig->getSlimSetting(PLATFORM_MODE));
 $twigLoader = new Twig_Loader_Filesystem(__DIR__ . '/../templates');
 $ui = new Twig_Environment($twigLoader, $platformConfig->getTwigSetting(PLATFORM_MODE));
 $ui->addGlobal('base_url', $app->request->getRootUri());
+$ui->addGlobal('resource_url', $app->request->getResourceUri());
 $ui->addExtension(new Twig_Extension_Debug());
 
 // orm init
