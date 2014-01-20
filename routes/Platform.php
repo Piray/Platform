@@ -29,11 +29,15 @@ class Platform
     }
     public function getApps()
     {
-        echo $this->ui->render('apps/apps.html.twig');
+        echo $this->ui->render('apps/apps.html.twig', array(
+            'page_header' => array('title' => 'Piray Apps', 'subtitle' => 'make you easy to use')
+        ));
     }
     public function getContact()
     {
-        echo $this->ui->render('contact/contact.html.twig');
+        echo $this->ui->render('contact/contact.html.twig', array(
+            'page_header' => array('title' => 'Contact Piray', 'subtitle' => 'any problem we will solve it')
+        ));
     }
     public function getIndex()
     {
