@@ -87,10 +87,6 @@ class Login extends \library\Module
         $request = $this->app->request();
         if ($this->session->getVariable('login')) {
             // check already login and pass
-            $this->ui->addGlobal('login_user', array(
-                'name' => $this->session->getVariable('user'),
-                'level' => $this->session->getVariable('level')
-            ));
         } else {
             // query to login
             $this->session->setVariable('request_url', $request->getRootUri() . $request->getResourceUri());
