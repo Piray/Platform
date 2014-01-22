@@ -22,6 +22,9 @@ class Platform
         $this->_userApi = new \api\User($this);
         $this->_mailApi = new \api\Mailer($this);
 
+        // hook all route add user session data
+        $this->app->hook('slim.before.router', array($this, 'dispatchUiGlobalData'));
+
         // platform routing
         $this->app->get('/', array($this, 'getIndex'))->name('index');
         $this->app->get('/contact', array($this, 'getContact'));
@@ -52,6 +55,21 @@ class Platform
             'title' => $moduleTitle,
             'image' => $moduleImage
         );
+    }
+    public function dispatchUiGlobalData()
+    {
+        // route data
+        $request = $this->app->request();
+        $this->ui->addGlobal('base_url', $request->getRootUri());
+        $this->ui->addGlobal('resource_url', $request->getResourceUri());
+
+        // session data
+        if ($this->session->getVariable('login')) {
+            $this->ui->addGlobal('login_user', array(
+                'name' => $this->session->getVariable('user'),
+                'level' => $this->session->getVariable('level')
+            ));
+        }
     }
     public function authenticate() // middleware to lock need to authenticate private page
     {
