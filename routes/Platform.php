@@ -4,7 +4,7 @@ namespace routes;
 
 class Platform
 {
-    private $_platformModule = array();
+    private $_platformModule = null;
     private $_userApi = null;
     private $_mailApi = null;
     private $_login = null;
@@ -30,7 +30,8 @@ class Platform
     public function getApps()
     {
         echo $this->ui->render('apps/apps.html.twig', array(
-            'page_header' => array('title' => 'Piray Apps', 'subtitle' => 'make you easy to use')
+            'page_header' => array('title' => 'Piray Apps', 'subtitle' => 'make you easy to use'),
+            'modules' => $this->_platformModule
         ));
     }
     public function getContact()
@@ -51,7 +52,6 @@ class Platform
             'title' => $moduleTitle,
             'image' => $moduleImage
         );
-        $this->ui->addGlobal('modules', $this->_platformModule);
     }
     public function authenticate() // middleware to lock need to authenticate private page
     {
