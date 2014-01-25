@@ -62,16 +62,17 @@
                         <!-- start authenticate nav -->
                         <ul class="nav navbar-nav navbar-right">
                             {% if login_user %}
+                            {% set message_count = 12 %}
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-bullhorn"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Message <span class="badge">{{ message_count }}</span></a>
                                 <ul class="dropdown-menu">
-                                    {% for i in 0..3 %}
+                                    {% for i in 0..message_count %}
                                     <li> <a href="#"> there are some news or informations.</a> </li>
                                     {% endfor %}
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ login_user.name }} <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> {{ login_user.name }} <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#">Profile</a></li>
                                     <li><a href="#">Settings</a></li>
@@ -79,10 +80,12 @@
                                     <li><a href="{{ base_url }}/logout">Logout</a></li>
                                 </ul>
                             </li>
+                            {% else %}
+                            <li><a href="{{ base_url }}/login"><span class="glyphicon glyphicon-lock"></span> Login</a></li>
                             {% endif %}
                         </ul>
-                    </div><!--/.nav-collapse -->
                         <!-- end authenticate nav -->
+                    </div>
                     <!-- end nav-collapse -->
                 </div>
             </div>
