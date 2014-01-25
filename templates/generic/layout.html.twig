@@ -38,6 +38,7 @@
             <!-- Fixed navbar -->
             <div class="navbar navbar-default navbar-fixed-top" role="navigation">
                 <div class="container">
+                    <!-- Toggle get grouped for better mobile display -->
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                             <span class="sr-only">Toggle navigation</span>
@@ -47,11 +48,18 @@
                         </button>
                         <a class="navbar-brand" href="{{ base_url }}/">Piray</a>
                     </div>
+
+                    <!-- Collect the nav links and other content for toggling -->
+                    <!-- start nav-collapse -->
                     <div class="collapse navbar-collapse">
+                        <!-- start main nav -->
                         <ul class="nav navbar-nav">
                             <li><a href="{{ base_url }}/apps"><span class="glyphicon glyphicon-th-large"></span> Apps</a></li>
                             <li><a href="{{ base_url }}/contact"><span class="glyphicon glyphicon-envelope"></span> Contact</a></li>
                         </ul>
+                        <!-- end main nav -->
+
+                        <!-- start authenticate nav -->
                         <ul class="nav navbar-nav navbar-right">
                             {% if login_user %}
                             <li class="dropdown">
@@ -74,6 +82,8 @@
                             {% endif %}
                         </ul>
                     </div><!--/.nav-collapse -->
+                        <!-- end authenticate nav -->
+                    <!-- end nav-collapse -->
                 </div>
             </div>
 
