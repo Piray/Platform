@@ -11,7 +11,8 @@
             {% if module.image %}
             <img src="{{ base_url }}{{ module.image }}" title="{{ module.title }}">
             {% else %}
-            <img src="http://placehold.it/300x300&text={{ module.name }}" title="{{ module.title }}">
+            {% set default_image = 'http://placehold.it/300x300&text=' ~ module.name %}
+            <img src="{{ default_image }}" title="{{ module.title }}">
             {% endif%}
         </a>
     </div>
