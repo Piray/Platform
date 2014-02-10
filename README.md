@@ -13,7 +13,7 @@ Usage:
 ###user
 | Field         | type           | Comment  |
 | ------------- |:-------------:| -----:|
-| id 		  	| int 			 | 流水號 |
+| id 		  	| uint 			 | 流水號 |
 | name			| varchar(255)	 | 使用者名稱 |
 | password		| varchar(255)	 | 密碼 |
 | level			| varchar(255)	 | 權限 |
@@ -25,9 +25,9 @@ Usage:
 
 | Field         | type           | Comment  |
 | ------------- |:-------------:| -----:|
-| id 		  	| int | 流水號 |
+| id 		  	| uint | 流水號 |
 | device_id		|varchar(17)|MAC Address ID|
-| title			|varchar(255)|機器名稱|
+| name			|varchar(255)|機器名稱|
 | type			|varchar(20)| piplayer/picam|
 | comment		|text|記錄說明|
 
@@ -35,26 +35,26 @@ Usage:
 ###device_config
 | Field         | type           | Comment  |
 | ------------- |:-------------:| -----:|
-| id 		  	| int | 流水號 |
-| field			| varchar(255) | 欄位 |
+| id 		  	| uint | 流水號 |
+| key			| varchar(255) | 欄位 |
 | value			| varchar(255) | 值 |
 
 -------------
 ###course
 | Field        | type           | Comment  |
 | ------------- |:-------------:| -----:|
-| id      			| int 		    | 流水號  |
-| file_id			| varchar(255) | 實體檔案編碼名稱 |
-| teacher_id		| int 	| 老師table關連id |
-| room				| varchar(255) | 錄影教室 |
-| course			| varchar(255) | 課程名稱 |
-| resolution		| varchar(20)  | 影像解析度|
-| filesize			| uint		   | 影像大小 |
-| record_start_time	| uint		   | 開始時間 |
-| record_end_time	| uint 	       | 結束時間 |
-| duration			| uint		   | 影片長度 |
-| preserved			| bool		   | 典藏（不會被自動移除）|
-| is_valid			| bool		   | 驗證是否檔案有效 |
+| id      			| uint 		    | 流水號  |
+| file_id			| varchar(255)  | 實體檔案編碼名稱 |
+| teacher_id		| uint      	| 老師table關連id |
+| room				| varchar(255)  | 錄影教室 |
+| name  			| varchar(255)  | 課程名稱 |
+| file_resolution   | varchar(20)   | 影像解析度|
+| file_size			| uint		    | 影像大小 |
+| record_start_time	| uint		    | 開始時間 |
+| record_end_time	| uint 	        | 結束時間 |
+| file_duration	    | uint		    | 影片長度 |
+| preserved			| bool		    | 典藏（不會被自動移除）|
+| is_valid			| bool		    | 驗證是否檔案有效 |
 
 
 ~~~
@@ -65,11 +65,11 @@ example: 程式設計_吳刻宗_2014-02-09_14:53:00
 ###booking
 | Field         | type           | Comment  |
 | ------------- |:-------------:| -----:|
-| id 		  	| int 			 | 流水號 |
-| course_id		| int 			 | 課程編號	 |
-| student_id 	| int  			 | 補課學生id 	|
+| id 		  	| uint 			 | 流水號 |
+| course_id		| uint 			 | 課程編號	 |
+| student_id 	| uint           | 補課學生id 	|
 | booking_time	| uint			 | 預約補課時間 |
-| status		| uint{enum}	 | 補課狀態 	|
+| status		| enum      	 | 補課狀態 	|
 | check_time	| uint			 | 學生報到時間 |
 | comment		| text 			 | 其他資訊 	|
 
@@ -86,9 +86,9 @@ example: 程式設計_吳刻宗_2014-02-09_14:53:00
 ###booking_setting
 | Field         | type           | Comment  |
 | ------------- |:-------------:| -----:|
-| id 		  	| int | 流水號 |
-| field			| varchar(255) | 欄位 |
-| value			| varchar(255) | 值 |
+| id 		  	| uint          | 流水號 |
+| key			| varchar(255)  | 欄位 |
+| value			| varchar(255)  | 值 |
 
 ~~~
 time_slice : {json}
@@ -98,7 +98,7 @@ time_slice : {json}
 ###teacher
 | Field         | type           | Comment  |
 | ------------- |:-------------:| -----:|
-| id 		  	| int			 | 流水號 |
+| id 		  	| uint			 | 流水號 |
 | name			| varchar(255) 	 | 老師名稱 |
 | is_valid		| bool 			 | 是否已經解雇或沒用(預設為true) |
 | comment		| text 			 | 其他資訊 |
@@ -107,7 +107,7 @@ time_slice : {json}
 ###student
 | Field         | type           | Comment  |
 | ------------- |:-------------:| -----:|
-| id 		  	| int 			 | 流水號 |
+| id 		  	| uint 			 | 流水號 |
 | name			| varchar(255) 	 | 學生名稱 |
 | phone			| varchar(20) 	 | 電話 |
 | comment		| text 			 | 其他資訊 |
@@ -116,8 +116,8 @@ time_slice : {json}
 ###system_config
 | Field         | type           | Comment  |
 | ------------- |:-------------:| -----:|
-| id 		  	| int | 流水號 |
-| field			| varchar(255) | 欄位 |
+| id 		  	| uint | 流水號 |
+| key           | varchar(255) | 欄位 |
 | value			| varchar(255) | 值 |
 
 ~~~
@@ -132,9 +132,9 @@ time_slice : {json}
 ###log
 | Field         | type           | Comment  |
 | ------------- |:-------------:| -----:|
-| id 		  	| int 			 | 流水號 |
+| id 		  	| uint 			 | 流水號 |
 | class			| varchar(255)	 | 模組分類 |
-| user_id		| int			 | 使用者id |
+| user_id		| uint			 | 使用者id |
 | message		| text			 | 操作記錄 |
 | time			| uint			 | 時間 |
 
