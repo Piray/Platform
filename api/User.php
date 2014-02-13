@@ -7,18 +7,10 @@ class User extends \library\Module
     public static $userLevelList = array(
         'root',
         'admin',
-        'normal'
+        'user'
     );
     public function init()
     {
-        /*
-         * prefix api/user
-         * N/A                  get
-         * /search/:name        get
-         * /create              post
-         * /delete              delete
-         * /update              put
-         */
         $this->app->group('/api/user', function () {
             $this->app->get('', array($this, 'getUsers'));
             $this->app->get('/search/:name', array($this, 'getSearchUser'));
@@ -32,37 +24,75 @@ class User extends \library\Module
      *
      * {
      *     "password": "update password",
-     *     "description": "",
-     *     "level": "normal"
+     *     "comment": "",
+     *     "level": "user"
      * }
      *
+     * {
+     *     "password": "update password",
+     * }
+     *
+     * {
+     *     "comment": "test user",
+     *     "level": "user"
+     * }
      */
     public function updateUser($name)
     {
+        $acceptField = array(
+            'password',
+            'level',
+            'comment'
+        );
         $updateUserData = $this->helper->receiveJson();
-        if (isset($updateUserData['password']) && isset($updateUserData['level']) && 
-            in_array($updateUserData['level'], self::$userLevelList)) {
-
-            if ($this->userExist($name)) {
-                $userRows = \ORM::forTable('user')->where('name', $name)->findMany();
-                foreach ($userRows as $userRow) {
-                    if (!empty($updateUserData['password'])) { // password can not be empty
-                        $userRow['password'] = $updateUserData['password'];
-                    }
-                    $userRow['description'] = $updateUserData['description'];
-                    $userRow['level'] = $updateUserData['level'];
-                    $userRow->save();
+        if (NULL !== $updateUserData) {
+            $allowUpdateData = array();
+            foreach ($updateUserData as $updateUserKey => $updateUserValue) {
+                if (in_array($updateUserKey, $acceptField)) {
+                    $allowUpdateData[$updateUserKey] = $updateUserValue;
+                } else {
+                    $this->helper->sendJson(403, array(
+                        'status' => 403,
+                        'message' => "Unknow field name " . $updateUserKey
+                    ));
+                    return;
                 }
-                
-                $this->helper->sendJson(200, array(
-                    'status' => 200,
-                    'message' => "User " . $name . " is update done."
-                ));
-                return;
+
+                if ('level' == $updateUserKey) {
+                    if (!in_array($updateUserValue, self::$userLevelList)) {
+                        $this->helper->sendJson(403, array(
+                            'status' => 403,
+                            'message' => "Unknow level " . $updateUserValue . " is invalid."
+                        ));
+                        return;
+                    }
+                }
+            }
+
+            if (!empty($allowUpdateData)) {
+                if ($this->userExist($name)) {
+                    $userRow = \ORM::forTable('user')->where('name', $name)->findOne();
+                    foreach ($allowUpdateData as $field => $data) {
+                        $userRow[$field] =  $data;
+                    }
+                    $userRow->save();
+
+                    $this->helper->sendJson(200, array(
+                        'status' => 200,
+                        'message' => "User " . $name . " is update done."
+                    ));
+                    return;
+                } else {
+                    $this->helper->sendJson(403, array(
+                        'status' => 403,
+                        'message' => "User " . $name . " is not exist."
+                    ));
+                    return;
+                }
             } else {
                 $this->helper->sendJson(403, array(
                     'status' => 403,
-                    'message' => "User " . $name . " is not exist."
+                    'message' => "User " . $name . " no data need update."
                 ));
                 return;
             }
@@ -96,8 +126,8 @@ class User extends \library\Module
      * {
      *     "name": "new user",
      *     "password": "new password",
-     *     "description": "",
-     *     "level": "normal"
+     *     "comment": "",
+     *     "level": "admin"
      * }
      *
      */
@@ -111,9 +141,9 @@ class User extends \library\Module
                 // user not exist, so create user
                 $newUser = \ORM::forTable('user')->create();
                 $newUser->name = $createUserData['name'];
-                $newUser->password = $createUserData['password'];
+                $newUser->password = md5($createUserData['password']);
                 $newUser->level = $createUserData['level'];
-                $newUser->description = $createUserData['description'];
+                $newUser->comment = $createUserData['comment'];
                 $newUser->save();
 
                 $this->helper->sendJson(200, array(
@@ -143,7 +173,7 @@ class User extends \library\Module
      *     "id": "1",
      *     "name": "dachichang",
      *     "level": "root",
-     *     "description": "Piray super user and system designer."
+     *     "comment": "Piray super user and system designer."
      * }
      *
      * for error
@@ -158,7 +188,7 @@ class User extends \library\Module
     {
         $userRows = \ORM::forTable('user')
             ->where('name', $name)
-            ->selectMany('id', 'name', 'level', 'description')
+            ->selectMany('id', 'name', 'level', 'comment')
             ->findArray();
 
         if (count($userRows) > 0) {
@@ -179,13 +209,13 @@ class User extends \library\Module
      *          "id": "1",
      *          "name": "dachichang",
      *          "level": "root",
-     *          "description": "Piray super user and system designer."
+     *          "comment": "Piray super user and system designer."
      *     },
      *     {
      *          "id": "2",
      *          "name": "test",
      *          "level": "normal",
-     *          "description": "Piray test user"
+     *          "comment": "Piray test user"
      *     }
      * ]
      *
@@ -193,7 +223,7 @@ class User extends \library\Module
     public function getUsers()
     {
         $this->helper->sendJson(200, \ORM::forTable('user')
-            ->selectMany('id', 'name', 'level', 'description')
+            ->selectMany('id', 'name', 'level', 'comment')
             ->findArray()
         );
     }
