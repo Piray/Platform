@@ -19,6 +19,7 @@ class Platform
         // init route module
         $this->_login = new \routes\Login($this);
         // init api module
+        $this->_deviceApi = new \api\Device($this);
         $this->_userApi = new \api\User($this);
         $this->_mailApi = new \api\Mailer($this);
 
