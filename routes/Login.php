@@ -55,7 +55,7 @@ class Login extends \library\Module
     {
         $userRow = \ORM::forTable('user')
             ->where('name', $username)
-            ->where('password', $password)
+            ->where('password', md5($password))
             ->findOne();
 
         if (false !== $userRow) {
