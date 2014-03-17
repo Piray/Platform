@@ -1,6 +1,6 @@
 <?php
 
-require '../library/vendor/autoload.php';
+require '../library/composer/vendor/autoload.php';
 define("PLATFORM_CONFIG_JSON", "../config/platform.json");
 define("PLATFORM_MODE", "development");
 define("PLATFORM_DATABASE", "piray");
