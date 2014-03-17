@@ -2,6 +2,10 @@
 
 {% block title %} {{ page_header.title }} {% endblock %}
 
+{% block style %}
+<link href="{{ base_url }}/assets/opensource/multi-columns-row/multi-columns-row.css" rel="stylesheet">
+{% endblock %}
+
 {% block main %}
 {% include 'generic/page_header.html.twig' %}
 <div class="row multi-columns-row">
