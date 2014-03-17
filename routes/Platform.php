@@ -22,6 +22,7 @@ class Platform
         $this->_deviceApi = new \api\Device($this);
         $this->_courseApi = new \api\Course($this);
         $this->_teacherApi = new \api\Teacher($this);
+        $this->_studentApi = new \api\Student($this);
         //$this->_piplayerApi = new \api\PiPlayer($this);
         $this->_userApi = new \api\User($this);
         $this->_mailApi = new \api\Mailer($this);
