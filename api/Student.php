@@ -1,6 +1,7 @@
 <?php
+
 namespace api;
-use \ORM;
+
 Class Student extends \library\Module
 {
     public function init()
@@ -18,15 +19,17 @@ Class Student extends \library\Module
      */
     function searhStudentByName($name) 
     {
-        $student = ORM::forTable('student')->whereLike('name','%'.$name.'%')->findArray();
+        $student = \ORM::forTable('student')->whereLike('name', '%'.$name.'%')->findArray();
         if($student) {
-            $this->helper->sendJson(200, array('result'=>$student));
+            $this->helper->sendJson(200, array(
+                'result' => $student
+            ));
             return;
         }
 
-        $this->helper->sendJson(404,array(
-            'status'=>404,
-            'message'=>'找不到該位學生'
+        $this->helper->sendJson(404, array(
+            'status' => 404,
+            'message' => '找不到該位學生'
         ));
     }
 
@@ -38,9 +41,9 @@ Class Student extends \library\Module
     function updateStudent($name)
     {
         //check the student exists or not
-        $student = ORM::forTable('student')->where('name',$name)->findOne();
+        $student = \ORM::forTable('student')->where('name', $name)->findOne();
         if (!$student) {
-            $student = ORM::forTable('student')->create();
+            $student = \ORM::forTable('student')->create();
             $student->phone = $this->app->request->post('phone');
         }
         $student->phone = $this->app->request->post('phone');
@@ -48,11 +51,15 @@ Class Student extends \library\Module
         $result = $student->save();
         
         if($result) {
-            $this->helper->sendJson(200, array('status'=>200));
+            $this->helper->sendJson(200, array(
+                'status' => 200
+            ));
         } else {
-            $this->helper->sendJson(500, array('status'=>200, 'message'=>'無法新增學生'));
+            $this->helper->sendJson(500, array(
+                'status' => 200,
+                'message'=> '無法新增學生'
+            ));
         }
     }
-
 }
 ?>
