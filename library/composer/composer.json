@@ -5,7 +5,8 @@
         "slim/slim": "2.4.*",
         "phpmailer/phpmailer": "5.2.*",
         "twitter/bootstrap": "3.1.*",
-        "fortawesome/font-awesome": "4.0.*"
+        "fortawesome/font-awesome": "4.0.*",
+        "components/underscore": "dev-master"
     },
     "autoload": {
         "psr-0": {

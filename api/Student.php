@@ -56,7 +56,7 @@ Class Student extends \library\Module
             ));
         } else {
             $this->helper->sendJson(500, array(
-                'status' => 200,
+                'status' => 500,
                 'message'=> '無法新增學生'
             ));
         }
